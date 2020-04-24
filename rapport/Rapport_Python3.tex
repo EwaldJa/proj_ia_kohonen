@@ -1,0 +1,78 @@
+\documentclass{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsfonts}
+\usepackage{geometry}
+ \geometry{
+     a4paper,
+     total={165mm,257mm},
+     left=25mm,
+     top=20mm,
+ }
+
+\title{Rapport Python3}
+\author{Ewald Janin }
+\date{Dernière mise à jour : 24 Avril 2020}
+
+\usepackage{natbib}
+\usepackage{graphicx}
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Même si je n'ai pas été très productif cet après-midi, je crois que je suis assez à l'aise avec les notions que l'on aborde dans ce cours, et j'ai bien compris le principe de ce réseau de neurones.
+\end{abstract}
+
+\section{Étude théorique}
+
+
+\subsection{Influence du taux d'apprentissage $\eta$}
+
+La formule de calcul du delta à appliquer sur le vecteur poids pour le mettre à jour pour chacun des neurones est $\Delta W_j = \eta e^{-\frac{||j-j^*||^2_c}{2\sigma^2}}(X-W_j)$.
+\\Dans le cas présent, nous étudions le neurone gagnant, donc $||j-j^*|| = 0$, ce qui nous donne $e^{-\frac{||j-j^*||^2_c}{2\sigma^2}} = 1$ (car $\forall x \in \mathbb{R}, x^0 = 1$). On peut donc ramener la formule de calcul de la mise à jour du poids à $\Delta W_j = \eta (X-W_j)$.
+
+\subsubsection{Cas taux d'apprentissage $\eta = 0$} 
+
+Dans le cas où $\eta = 0$, nous identifions immédiatement que $\Delta W_j = 0$. Il n'y a donc pas de modification appliquée sur le vecteur poids de chacun des neurones, donc leur poids restera celui qui a été déterminé à l'initialisation. 
+
+\subsubsection{Cas taux d'apprentissage $\eta = 1$} 
+
+Dans le cas où $\eta = 1$, $\Delta W_j = (X-W_j)$, c'est à dire que le delta de mise à jour pour le poids est égal à la distance euclidienne entre le neurone et l'entrée, donc son nouveau poids est la valeur de l'entrée : $W = W^* + (X-W^*) = X$.
+
+\subsubsection{Cas taux d'apprentissage $\eta \in  ]0,1[$} 
+
+Dans ce cas là, la formule permettant de calculer le nouveau poids du noeud gagnant est $W_j = \eta X + (1-\eta) W^*$. Cette fonction a pour représentation mathématique un plan. Plus $\eta$ se rapproche de 1, plus le nouveau poids du noeud sera proche de la valeur de l'entrée $X$. À l'inverse, plus $\eta$ tend vers 0, plus le poids va rester similaire à son ancien poids.
+\\En résumé, si je note $W_j$ le nouveau poids du noeud gagnant :
+\begin{itemize}
+    \item $\lim_{\eta \to 0} W_j = W^*$
+    \item $\lim_{\eta \to 1} W_j = X$
+\end{itemize}
+Pour les noeuds voisins, nous obtenons le même résultat, qui est à multiplier par la valeur de la fonction de voisinage, dont les valeurs ici appartiennent à $]0,1[$ pour les noeuds voisins du gagnant. L'influence du taux d'apprentissage $\eta$ est donc la même concernant la composante qui va avoir le plus d'importance dans le calcul du nouveau poids, à ceci près que le noeud apprend moins que le noeud gagnant.
+
+
+\subsection{Influence de la largeur du voisinage gaussien $\sigma$}
+
+Nous nous replaçons dans le cas général et non plus seulement sur le noeud gagnant, il nous faut donc bien prendre en compte la fonction de voisinage $V(j,j^*) =  e^{-\frac{||j-j^*||^2_c}{2\sigma^2}}$.
+
+\subsubsection{Influence de $\sigma$ sur l'apprentissage des noeuds voisins} 
+
+Ici, la fonction de voisinage renvoie une valeur comprise dans $]0,1]$ (car $\lim_{x \to - \infty} e^x = 0$), même si la valeur de 1 n'est retournée que pour le noeud gagnant. Plus les noeuds sont situés loin du noeud gagnant, plus la valeur de cette fonction de voisinage est faible et moins le noeud apprend.
+L'augmentation du coefficient de voisinage $\sigma$ va permettre aux noeuds voisins d'apprendre plus, car l'exposant de l'exponentiel aura une valeur plus proche de zéro, et donc la fonction de voisinage sera plus élevée.
+
+
+\subsubsection{Influence de $\sigma$ sur la densité de l'auto-organisation}
+
+Plus le coefficient de voisinage $\sigma$ est élevé, plus des noeuds plus éloignés du noeud gagnant sont quand même influencés par la valeur de l'entrée du pas courant. Les noeuds vont donc avoir tendance à rester 'proches' les uns des autres avec l'augmentation de $\sigma$.
+
+
+\subsubsection{Mesure de l'influence de $\sigma$}
+
+Pour mesurer l'influence du coefficient de voisinage $\sigma$, je propose de faire deux simulations avec le même jeu de données, avec un $\sigma$ très élevé dans une des simulations, et un $\sigma$ très bas dans l'autre. Pour mettre ce phénomène le plus en avant possible, nous pourrions utiliser un petit réseau de neurones par rapport aux données, ce qui permettrait de mettre encore plus en évidence la différence de densité du réseau de neurones à convergence.
+
+
+\section{Conclusion}
+
+
+
+\end{document}
