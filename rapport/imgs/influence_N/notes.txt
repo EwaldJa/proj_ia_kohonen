@@ -1,0 +1,15 @@
+N minuscule = 300
+N minuscule : erreur quantif vecto moyenne : 0.03230460363561154
+
+N petit = 3000
+N petit : erreur quantif vecto moyenne : 0.006627453952386766
+
+N normal = 30000
+N normal : erreur quantif vecto moyenne : 0.0047960780322378205
+
+N grand = 300000
+N grand : erreur quantif vecto moyenne : 0.004739004214184547
+
+
+N immense = 3 000 000
+N immense : erreur quantif vecto moyenne : 0.004349075544048882

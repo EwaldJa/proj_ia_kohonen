@@ -1,0 +1,5 @@
+eta petit = 0.04
+eta petit : erreur quantif vecto moyenne : 0.004455893535232226
+
+eta grand = 0.96
+eta grand : erreur quantif vecto moyenne : 0.008565638084729316

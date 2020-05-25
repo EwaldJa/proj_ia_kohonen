@@ -1,0 +1,11 @@
+sigma extreme = 0.2
+sigma extreme : erreur quantif vecto moyenne : 0.011669541881712108
+
+sigma petit = 0.8
+sigma petit : erreur quantif vecto moyenne : 0.003036747957095098
+
+sigma grand = 4
+sigma grand : erreur quantif vecto moyenne : 0.04152494100535783
+
+sigma extreme : 15
+sigma extreme : erreur quantif vecto moyenne : 0.1498

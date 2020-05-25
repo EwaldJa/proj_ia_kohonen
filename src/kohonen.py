@@ -248,7 +248,7 @@ if __name__ == '__main__':
   network = SOM((2,1),(10,10))
   # PARAMÈTRES DU RÉSEAU
   # Taux d'apprentissage
-  ETA = 0.96
+  ETA = 0.05
   # Largeur du voisinage
   SIGMA = 1.4
   # Nombre de pas de temps d'apprentissage
@@ -263,8 +263,8 @@ if __name__ == '__main__':
   # TODO décommenter les données souhaitées
   nsamples = 1500
   # Ensemble de données 1
-  samples = numpy.random.random((nsamples,2,1))
-  samples[:,0,:] -= 1
+#  samples = numpy.random.random((nsamples,2,1))
+#  samples[:,0,:] -= 1
   # Ensemble de données 2
 #  samples1 = -numpy.random.random((nsamples//3,2,1))
 #  samples2 = numpy.random.random((nsamples//3,2,1))
@@ -278,6 +278,14 @@ if __name__ == '__main__':
 #  samples2 = numpy.random.random((nsamples//2,2,1))
 #  samples2[:,1,:] -= 1
 #  samples = numpy.concatenate((samples1,samples2))
+  # Données forme triangle
+  samples = numpy.random.random((nsamples,2,1))
+  samples[:,0,:] -= 1
+  for i in range (0,nsamples) :
+    dist = samples[i, 1, :] + samples[i, 0, :]
+    if dist > 0 :
+      samples[i,1,:] -= dist
+
   # Ensemble de données robotiques
 #  samples = numpy.random.random((nsamples,4,1))
 #  samples[:,0:2,:] *= numpy.pi
